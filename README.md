@@ -15,6 +15,12 @@
 
 A simple movie watchlist tracker backend built using the Gin framework and SQLite as the database.
 
+
+> [!TIP]
+> Test cases are covered `Total: (85.7%)`
+>
+> Test details are mentioned below [**Test Cases**](#test_tube-running-tests)
+
 ## :computer: Tech Stack
 - [**Go**](https://go.dev/) : Programming language
 - [**Gin**](https://github.com/gin-gonic/gin) : Web framework
@@ -149,12 +155,69 @@ body of the request
 
 <br>
 
+### :test_tube: Running Tests
+
+To run **all tests**:
+
+```bash
+go test ./tests/...
+```
+
+To run tests with verbose output:
+
+```bash
+go test -v ./tests/...
+```
+
+<br>
+
+### 📊 Viewing Test Coverage
+
+**Step-1:** To generate a coverage report:
+
+```bash
+go test -v -coverpkg=./pkg/handlers,./pkg/repositories ./tests/... -coverprofile=coverage.out
+```
+
+**Step-2:** To view a coverage summary in the terminal:
+
+```bash
+go tool cover -func=coverage.out
+```
+
+**Step-3:** To view a detailed HTML report:
+
+```bash
+go tool cover -html=coverage.out -o coverage.html 
+```
+
+
+> [!IMPORTANT]
+>
+> After generating the `coverage.html` file open it in browser to view the report
+
+<br>
+
+<div align="center">
+    <img src="./docs/assets/tests/test_run.png" alt="GET" style="width: 48%;">
+    <img src="./docs/assets/tests/test_coverage_summary.png" alt="POST" style="width: 48%;">
+</div>
+
+<div align="center">
+    <img src="./docs/assets/tests/test_unit_test.png" alt="DELETE" style="width: 48%;">
+    <img src="./docs/assets/tests/test_integration_test.jpeg" alt="PATCH" style="width: 48%;">
+</div>
+
+<br>
+
+
 ## :seedling: Todo / Future Improvements
 - [x] Show All WatchList
 - [x] Get Particular WatchList By ID
 - [x] Add New WatchList Data
 - [x] Delete WatchList Data
 - [x] Update WatchList Data
+- [x] Add Test
 - [ ] Web Application for this API (NextJS/Vite-React)
 
 ## :compass: About

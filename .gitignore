@@ -1,5 +1,9 @@
 # Binaries and build artifacts
 /cine-dots
+
+# Tests
+/coverage.out
+
 /tmp/
 *.exe
 *.out

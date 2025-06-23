@@ -9,7 +9,8 @@ import (
 )
 
 type WatchListHandler struct {
-	WatchListModel *repositories.WatchListModel
+	// WatchListModel *repositories.WatchListModel
+	WatchListModel repositories.WatchListModelInterface // Interface type
 }
 
 // Get
