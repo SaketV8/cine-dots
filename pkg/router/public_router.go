@@ -16,15 +16,15 @@ func SetupPublicRouter(app *App, superRouterGroup *gin.Engine) {
 	{
 		v1 := routerGroup.Group(utils.ROUTER_PREFIX_VERSION)
 		{
-			v1.GET("/watchlist/all", app.WatchList.GetAllWatchListHandler)
-			v1.GET("/watchlist/watched", app.WatchList.GetWatchedListHandler)
-			v1.GET("/watchlist/watching", app.WatchList.GetWatchingListHandler)
-			v1.GET("/watchlist/notwatched", app.WatchList.GetNotWatchedListHandler)
-			v1.GET("/watchlist/:watchlist_id", app.WatchList.GetWatchListByIdHandler)
+			v1.GET("/watchlist/all", app.WatchListHandler.GetAllWatchListHandler)
+			v1.GET("/watchlist/watched", app.WatchListHandler.GetWatchedListHandler)
+			v1.GET("/watchlist/watching", app.WatchListHandler.GetWatchingListHandler)
+			v1.GET("/watchlist/notwatched", app.WatchListHandler.GetNotWatchedListHandler)
+			v1.GET("/watchlist/:watchlist_id", app.WatchListHandler.GetWatchListByIdHandler)
 
-			v1.POST("/watchlist/add", app.WatchList.AddWatchListHandler)
-			v1.DELETE("/watchlist/delete", app.WatchList.DeleteWatchListHandler)
-			v1.PATCH("/watchlist/update", app.WatchList.UpdateWatchListHandler)
+			v1.POST("/watchlist/add", app.WatchListHandler.AddWatchListHandler)
+			v1.DELETE("/watchlist/delete", app.WatchListHandler.DeleteWatchListHandler)
+			v1.PATCH("/watchlist/update", app.WatchListHandler.UpdateWatchListHandler)
 		}
 	}
 }

@@ -7,6 +7,18 @@ import (
 	"github.com/saketV8/cine-dots/pkg/models"
 )
 
+type WatchListModelInterface interface {
+	GetAllWatchList() ([]models.Watchlist, error)
+	GetWatchedList() ([]models.Watchlist, error)
+	GetWatchingList() ([]models.Watchlist, error)
+	GetNotWatchedList() ([]models.Watchlist, error)
+	GetWatchListById(watchlist_id string) (models.Watchlist, error)
+
+	AddWatchList(watchList models.Watchlist) (models.Watchlist, error)
+	DeleteWatchList(watchList models.WatchListDeleteRequest) (int, error)
+	UpdateWatchList(watchList models.WatchListUpdateRequest) (int, error)
+}
+
 type WatchListModel struct {
 	DB *sql.DB
 }

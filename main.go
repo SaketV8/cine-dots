@@ -30,7 +30,7 @@ func main() {
 
 	// passing the DB via dependency injection
 	app := &router.App{
-		WatchList: &handlers.WatchListHandler{
+		WatchListHandler: &handlers.WatchListHandler{
 			WatchListModel: &repositories.WatchListModel{
 				DB: db.DB,
 			},

@@ -15,7 +15,7 @@ import (
 
 type App struct {
 	// Add more handlers as needed
-	WatchList *handlers.WatchListHandler
+	WatchListHandler *handlers.WatchListHandler
 }
 
 // func SetupRouter(DbModel *querydb.DbModel) {
