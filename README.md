@@ -224,4 +224,4 @@ go tool cover -html=coverage.out -o coverage.html
 - [ ] Web Application for this API (NextJS/Vite-React)
 
 ## :compass: About
-This project was created as an assignment for Session 2 of Keploy's API Fellowship.
+This project was created as an assignment for Keploy's API Fellowship Sessions.
