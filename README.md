@@ -100,13 +100,13 @@ go build
 ### :satellite: Open the Postman/Httpie and Make Request
 
 <div align="center">
-    <img src="./docs/assets/watchlist_all.png" alt="GET" style="width: 48%;">
-    <img src="./docs/assets/watchlist_add.png" alt="POST" style="width: 48%;">
+    <img src="./images/watchlist_all.png" alt="GET" style="width: 48%;">
+    <img src="./images/watchlist_add.png" alt="POST" style="width: 48%;">
 </div>
 
 <div align="center">
-    <img src="./docs/assets/watchlist_delete.png" alt="DELETE" style="width: 48%;">
-    <img src="./docs/assets/watchlist_update.png" alt="PATCH" style="width: 48%;">
+    <img src="./images/watchlist_delete.png" alt="DELETE" style="width: 48%;">
+    <img src="./images/watchlist_update.png" alt="PATCH" style="width: 48%;">
 </div>
 
 <br>
@@ -202,13 +202,13 @@ go tool cover -html=coverage.out -o coverage.html
 <br>
 
 <div align="center">
-    <img src="./docs/assets/tests/test_run.png" alt="GET" style="width: 48%;">
-    <img src="./docs/assets/tests/test_coverage_summary.png" alt="POST" style="width: 48%;">
+    <img src="./images/tests/test_run.png" alt="GET" style="width: 48%;">
+    <img src="./images/tests/test_coverage_summary.png" alt="POST" style="width: 48%;">
 </div>
 
 <div align="center">
-    <img src="./docs/assets/tests/test_unit_test.png" alt="DELETE" style="width: 48%;">
-    <img src="./docs/assets/tests/test_integration_test.jpeg" alt="PATCH" style="width: 48%;">
+    <img src="./images/tests/test_unit_test.png" alt="DELETE" style="width: 48%;">
+    <img src="./images/tests/test_integration_test.jpeg" alt="PATCH" style="width: 48%;">
 </div>
 
 <br>
