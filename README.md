@@ -17,6 +17,11 @@ A simple movie watchlist tracker backend built using the Gin framework and SQLit
 
 
 > [!TIP]
+> Keploy Test Suite Integrated
+>
+> Keploy Test Suite details are mentioned below [**Keploy Test Suite**](#rabbit-keploy-test-suite)
+
+> [!TIP]
 > Test cases are covered `Total: (85.7%)`
 >
 > Test details are mentioned below [**Test Cases**](#test_tube-running-tests)
@@ -75,10 +80,19 @@ go run migrations/migration.go
 
 - Building the Application Binary:
 ```sh
-go build
+go build -o cine-dots
 ```
 
-> :rocket: You're all set! Now you have `cine-dots` binary
+- Starting the Application:
+```sh
+./cine-dots
+```
+
+> [!TIP]
+> Now you can
+> Access Swagger at [Swagger UI](http://localhost:9090/swagger/index.html)
+
+> :rocket: You're all set!
 
 <br>
 
@@ -94,6 +108,8 @@ go build
 | **POST** | `http://localhost:9090/api/v1/watchlist/add`                             | Add a new item to the watchlist |
 | **DELETE** | `http://localhost:9090/api/v1/watchlist/delete`                        | Delete an item from the watchlist |
 | **PATCH** | `http://localhost:9090/api/v1/watchlist/update`                         | Update an item in the watchlist |
+| **====** | `==============================================`                         | ========================= |
+| **GET** | `http://localhost:9090/swagger/index.html`                                | Acess Swagger UI               |
 
 <br>
 
@@ -213,6 +229,40 @@ go tool cover -html=coverage.out -o coverage.html
 
 <br>
 
+> [!NOTE]  
+> 🌸 `Assignment - 4`
+>
+> OpenAPI/Swagger ☑️
+>
+> CI/CD using github workflow ☑️
+>
+> Keploy Integration ☑️
+>
+
+
+> [!TIP]
+> Access Swagger at [Swagger UI](http://localhost:9090/swagger/index.html)
+
+### :rabbit: Keploy Test Suite
+
+> Keploy Test Suite (Keploy Dashboard)
+
+<div align="center">
+    <img src="./images/keploy-tests/keploy-test-report.png">
+    <!-- <img src="./images/keploy-tests/keploy-test-report-local.png" alt="GET" style="width: 48%;"> -->
+</div>
+
+<br>
+
+> Keploy Test Suite (CLI)
+
+<div align="center">
+    <!-- <img src="./images/keploy-tests/keploy-test-report.png" alt="GET" style="width: 48%;"> -->
+    <img src="./images/keploy-tests/keploy-test-report-local.png">
+</div>
+
+<br>
+
 
 ## :seedling: Todo / Future Improvements
 - [x] Show All WatchList
@@ -221,6 +271,9 @@ go tool cover -html=coverage.out -o coverage.html
 - [x] Delete WatchList Data
 - [x] Update WatchList Data
 - [x] Add Test
+- [x] Add Swagger/OpenAPI
+- [x] Add Keploy Test Suite
+- [x] Integrate CI/CD using github workflow with keploy test integration
 - [ ] Web Application for this API (NextJS/Vite-React)
 
 ## :compass: About
