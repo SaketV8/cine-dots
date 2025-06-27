@@ -1,6 +1,6 @@
 # Binaries and build artifacts
 /cine-dots
-
+/keploy-agent.exe
 # Tests
 /coverage.out
 

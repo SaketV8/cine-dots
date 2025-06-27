@@ -14,6 +14,11 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// @title           Cine-Dots WatchList API
+// @version         1.0
+// @description     A watchlist tracker application built with the Gin framework.
+// @host            localhost:9090
+// @BasePath        /
 func main() {
 	// log.SetReportCaller(true)
 

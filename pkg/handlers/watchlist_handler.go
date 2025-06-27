@@ -13,8 +13,17 @@ type WatchListHandler struct {
 	WatchListModel repositories.WatchListModelInterface // Interface type
 }
 
-// Get
+// GET Methods
 // =====================================================================================
+
+// GetAllWatchListHandler godoc
+// @Summary      Get all Watchlists
+// @Description  Retrieves all watchlists from the database.
+// @Tags         watchlists
+// @Produce      json
+// @Success      200  {array}  models.Watchlist
+// @Failure      500  {object} gin.H  "Failed to get All WatchList"
+// @Router       /watchlist/all [get]
 func (watchListHandler *WatchListHandler) GetAllWatchListHandler(ctx *gin.Context) {
 	watchLists, err := watchListHandler.WatchListModel.GetAllWatchList()
 	if err != nil {
@@ -27,6 +36,14 @@ func (watchListHandler *WatchListHandler) GetAllWatchListHandler(ctx *gin.Contex
 	ctx.JSON(http.StatusOK, watchLists)
 }
 
+// GetWatchedListHandler godoc
+// @Summary      Retrieve watched watchlists
+// @Description  Fetches all watchlists with a "watched" status from the database
+// @Tags         watchlists
+// @Produce      json
+// @Success      200  {array}  models.Watchlist
+// @Failure      500  {object} gin.H  "Failed to get Watched List"
+// @Router       /watchlist/watched [get]
 func (watchListHandler *WatchListHandler) GetWatchedListHandler(ctx *gin.Context) {
 	watchLists, err := watchListHandler.WatchListModel.GetWatchedList()
 	if err != nil {
@@ -39,6 +56,14 @@ func (watchListHandler *WatchListHandler) GetWatchedListHandler(ctx *gin.Context
 	ctx.JSON(http.StatusOK, watchLists)
 }
 
+// GetWatchingListHandler godoc
+// @Summary      Retrieve watchlists with "watching" status
+// @Description  Returns all watchlists with a "watching" status from the database
+// @Tags         watchlists
+// @Produce      json
+// @Success      200  {array}   models.Watchlist
+// @Failure      500  {object}  gin.H  "Failed to get Watching List"
+// @Router       /watchlist/watching [get]
 func (watchListHandler *WatchListHandler) GetWatchingListHandler(ctx *gin.Context) {
 	watchLists, err := watchListHandler.WatchListModel.GetWatchingList()
 	if err != nil {
@@ -51,6 +76,14 @@ func (watchListHandler *WatchListHandler) GetWatchingListHandler(ctx *gin.Contex
 	ctx.JSON(http.StatusOK, watchLists)
 }
 
+// GetNotWatchedListHandler godoc
+// @Summary      Retrieve watchlists that are not watched
+// @Description  Returns all watchlists with a "not watched" status from the database
+// @Tags         watchlists
+// @Produce      json
+// @Success      200  {array}   models.Watchlist
+// @Failure      500  {object}  gin.H  "Failed to get Watching List"
+// @Router       /watchlist/notwatched [get]
 func (watchListHandler *WatchListHandler) GetNotWatchedListHandler(ctx *gin.Context) {
 	watchLists, err := watchListHandler.WatchListModel.GetNotWatchedList()
 	if err != nil {
@@ -63,6 +96,15 @@ func (watchListHandler *WatchListHandler) GetNotWatchedListHandler(ctx *gin.Cont
 	ctx.JSON(http.StatusOK, watchLists)
 }
 
+// GetWatchListByIdHandler godoc
+// @Summary      Retrieve a watchlist by ID
+// @Description  Fetches the watchlist whose ID is provided in the path
+// @Tags         watchlists
+// @Produce      json
+// @Param        watchlist_id  path      string  true  "Watchlist ID"
+// @Success      200           {object}  models.Watchlist
+// @Failure      500           {object}  gin.H  "Failed to get WatchList by ID"
+// @Router       /watchlist/{watchlist_id} [get]
 func (watchListHandler *WatchListHandler) GetWatchListByIdHandler(ctx *gin.Context) {
 	watchlist_id_param := ctx.Param("watchlist_id")
 	watchLists, err := watchListHandler.WatchListModel.GetWatchListById(watchlist_id_param)
@@ -81,6 +123,18 @@ func (watchListHandler *WatchListHandler) GetWatchListByIdHandler(ctx *gin.Conte
 
 // Other methods
 // =====================================================================================
+
+// AddWatchListHandler godoc
+// @Summary      Create a new watchlist item
+// @Description  Adds a new watchlist entry to the database
+// @Tags         watchlists
+// @Accept       json
+// @Produce      json
+// @Param        watchlist  body      models.WatchListAddRequestExample  true  "Watchlist Data"
+// @Success      200        {object}  models.Watchlist
+// @Failure      400        {object}  gin.H  "Invalid WatchList Data"
+// @Failure      500        {object}  gin.H  "Failed to add WatchList data"
+// @Router       /watchlist/add [post]
 func (watchListHandler *WatchListHandler) AddWatchListHandler(ctx *gin.Context) {
 	//getting param from POST request body
 	var body models.Watchlist
@@ -108,6 +162,17 @@ func (watchListHandler *WatchListHandler) AddWatchListHandler(ctx *gin.Context) 
 	ctx.JSON(http.StatusOK, watchListAdded)
 }
 
+// DeleteWatchListHandler godoc
+// @Summary      Delete a watchlist entry
+// @Description  Removes a watchlist from the database based on the provided watchlist ID
+// @Tags         watchlists
+// @Accept       json
+// @Produce      json
+// @Param        request  body      models.WatchListDeleteRequest  true  "Delete Request (watchlist_id)"
+// @Success      200      {object}  gin.H  "WatchList deleted successfully"
+// @Failure      400      {object}  gin.H  "Invalid WatchList ID"
+// @Failure      500      {object}  gin.H  "Failed to delete WatchList"
+// @Router       /watchlist/delete [delete]
 func (watchListHandler *WatchListHandler) DeleteWatchListHandler(ctx *gin.Context) {
 	//getting param from POST request body
 	var body models.WatchListDeleteRequest
@@ -141,6 +206,17 @@ func (watchListHandler *WatchListHandler) DeleteWatchListHandler(ctx *gin.Contex
 	})
 }
 
+// UpdateWatchListHandler godoc
+// @Summary      Update an existing watchlist entry
+// @Description  Updates an existing watchlist with new data
+// @Tags         watchlists
+// @Accept       json
+// @Produce      json
+// @Param        request  body      models.WatchListUpdateRequestExample  true  "Updated WatchList Data"
+// @Success      200      {object}  gin.H  "WatchList updated successfully"
+// @Failure      400      {object}  gin.H  "Invalid WatchList Data"
+// @Failure      500      {object}  gin.H  "Failed to update WatchList"
+// @Router       /watchlist/update [patch]
 func (watchListHandler *WatchListHandler) UpdateWatchListHandler(ctx *gin.Context) {
 	//getting param from POST request body
 	var body models.WatchListUpdateRequest

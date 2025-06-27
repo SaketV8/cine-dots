@@ -6,13 +6,17 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/saketV8/cine-dots/pkg/utils"
+
+	docs "github.com/saketV8/cine-dots/docs"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func SetupPublicRouter(app *App, superRouterGroup *gin.Engine) {
 
-	// <ROUTER_PREFIX> = /api
-	// <ROUTER_PREFIX_VERSION> = /v1
+	docs.SwaggerInfo.BasePath = "/api/v1"
 	routerGroup := superRouterGroup.Group(utils.ROUTER_PREFIX)
+
 	{
 		v1 := routerGroup.Group(utils.ROUTER_PREFIX_VERSION)
 		{
@@ -27,4 +31,11 @@ func SetupPublicRouter(app *App, superRouterGroup *gin.Engine) {
 			v1.PATCH("/watchlist/update", app.WatchListHandler.UpdateWatchListHandler)
 		}
 	}
+
+	// routerGroup.GET()
+	// Swagger endpoint
+	superRouterGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// routerGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// routerGroup.GET("/health", HealthCheck)
 }

@@ -1,0 +1,430 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A watchlist tracker application built with the Gin framework.",
+        "title": "Cine-Dots WatchList API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:9090",
+    "basePath": "/",
+    "paths": {
+        "/watchlist/add": {
+            "post": {
+                "description": "Adds a new watchlist entry to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Create a new watchlist item",
+                "parameters": [
+                    {
+                        "description": "Watchlist Data",
+                        "name": "watchlist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.WatchListAddRequestExample"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Watchlist"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid WatchList Data",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to add WatchList data",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/all": {
+            "get": {
+                "description": "Retrieves all watchlists from the database.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Get all Watchlists",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Watchlist"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get All WatchList",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/delete": {
+            "delete": {
+                "description": "Removes a watchlist from the database based on the provided watchlist ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Delete a watchlist entry",
+                "parameters": [
+                    {
+                        "description": "Delete Request (watchlist_id)",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.WatchListDeleteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "WatchList deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid WatchList ID",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete WatchList",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/notwatched": {
+            "get": {
+                "description": "Returns all watchlists with a \"not watched\" status from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Retrieve watchlists that are not watched",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Watchlist"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get Watching List",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/update": {
+            "patch": {
+                "description": "Updates an existing watchlist with new data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Update an existing watchlist entry",
+                "parameters": [
+                    {
+                        "description": "Updated WatchList Data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.WatchListUpdateRequestExample"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "WatchList updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid WatchList Data",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to update WatchList",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/watched": {
+            "get": {
+                "description": "Fetches all watchlists with a \"watched\" status from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Retrieve watched watchlists",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Watchlist"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get Watched List",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/watching": {
+            "get": {
+                "description": "Returns all watchlists with a \"watching\" status from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Retrieve watchlists with \"watching\" status",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Watchlist"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get Watching List",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
+        "/watchlist/{watchlist_id}": {
+            "get": {
+                "description": "Fetches the watchlist whose ID is provided in the path",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "watchlists"
+                ],
+                "summary": "Retrieve a watchlist by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Watchlist ID",
+                        "name": "watchlist_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Watchlist"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get WatchList by ID",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "gin.H": {
+            "type": "object",
+            "additionalProperties": {}
+        },
+        "models.WatchListAddRequestExample": {
+            "type": "object",
+            "required": [
+                "director",
+                "genre",
+                "release_year",
+                "status",
+                "title"
+            ],
+            "properties": {
+                "added_date": {
+                    "type": "string",
+                    "example": "2025-06-20T00:00:00Z"
+                },
+                "director": {
+                    "type": "string",
+                    "example": "Lee Unkrich"
+                },
+                "genre": {
+                    "type": "string",
+                    "example": "Animation"
+                },
+                "release_year": {
+                    "type": "integer",
+                    "example": 2017
+                },
+                "status": {
+                    "type": "string",
+                    "example": "not watched"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Coco"
+                }
+            }
+        },
+        "models.WatchListDeleteRequest": {
+            "type": "object",
+            "required": [
+                "watchlist_id"
+            ],
+            "properties": {
+                "watchlist_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.WatchListUpdateRequestExample": {
+            "type": "object",
+            "required": [
+                "director",
+                "genre",
+                "release_year",
+                "status",
+                "title",
+                "watchlist_id"
+            ],
+            "properties": {
+                "added_date": {
+                    "type": "string",
+                    "example": "2025-06-20T00:00:00Z"
+                },
+                "director": {
+                    "type": "string",
+                    "example": "Lee Unkrich"
+                },
+                "genre": {
+                    "type": "string",
+                    "example": "Animation"
+                },
+                "release_year": {
+                    "type": "integer",
+                    "example": 2017
+                },
+                "status": {
+                    "type": "string",
+                    "example": "watching"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Coco"
+                },
+                "watchlist_id": {
+                    "type": "integer",
+                    "example": 7
+                }
+            }
+        },
+        "models.Watchlist": {
+            "type": "object",
+            "required": [
+                "added_date",
+                "director",
+                "genre",
+                "release_year",
+                "status",
+                "title"
+            ],
+            "properties": {
+                "added_date": {
+                    "type": "string"
+                },
+                "director": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "release_year": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "watchlist_id": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

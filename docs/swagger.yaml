@@ -1,0 +1,292 @@
+basePath: /
+definitions:
+  gin.H:
+    additionalProperties: {}
+    type: object
+  models.WatchListAddRequestExample:
+    properties:
+      added_date:
+        example: "2025-06-20T00:00:00Z"
+        type: string
+      director:
+        example: Lee Unkrich
+        type: string
+      genre:
+        example: Animation
+        type: string
+      release_year:
+        example: 2017
+        type: integer
+      status:
+        example: not watched
+        type: string
+      title:
+        example: Coco
+        type: string
+    required:
+    - director
+    - genre
+    - release_year
+    - status
+    - title
+    type: object
+  models.WatchListDeleteRequest:
+    properties:
+      watchlist_id:
+        type: integer
+    required:
+    - watchlist_id
+    type: object
+  models.WatchListUpdateRequestExample:
+    properties:
+      added_date:
+        example: "2025-06-20T00:00:00Z"
+        type: string
+      director:
+        example: Lee Unkrich
+        type: string
+      genre:
+        example: Animation
+        type: string
+      release_year:
+        example: 2017
+        type: integer
+      status:
+        example: watching
+        type: string
+      title:
+        example: Coco
+        type: string
+      watchlist_id:
+        example: 7
+        type: integer
+    required:
+    - director
+    - genre
+    - release_year
+    - status
+    - title
+    - watchlist_id
+    type: object
+  models.Watchlist:
+    properties:
+      added_date:
+        type: string
+      director:
+        type: string
+      genre:
+        type: string
+      release_year:
+        type: integer
+      status:
+        type: string
+      title:
+        type: string
+      watchlist_id:
+        type: integer
+    required:
+    - added_date
+    - director
+    - genre
+    - release_year
+    - status
+    - title
+    type: object
+host: localhost:9090
+info:
+  contact: {}
+  description: A watchlist tracker application built with the Gin framework.
+  title: Cine-Dots WatchList API
+  version: "1.0"
+paths:
+  /watchlist/{watchlist_id}:
+    get:
+      description: Fetches the watchlist whose ID is provided in the path
+      parameters:
+      - description: Watchlist ID
+        in: path
+        name: watchlist_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Watchlist'
+        "500":
+          description: Failed to get WatchList by ID
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Retrieve a watchlist by ID
+      tags:
+      - watchlists
+  /watchlist/add:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new watchlist entry to the database
+      parameters:
+      - description: Watchlist Data
+        in: body
+        name: watchlist
+        required: true
+        schema:
+          $ref: '#/definitions/models.WatchListAddRequestExample'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Watchlist'
+        "400":
+          description: Invalid WatchList Data
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Failed to add WatchList data
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create a new watchlist item
+      tags:
+      - watchlists
+  /watchlist/all:
+    get:
+      description: Retrieves all watchlists from the database.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Watchlist'
+            type: array
+        "500":
+          description: Failed to get All WatchList
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get all Watchlists
+      tags:
+      - watchlists
+  /watchlist/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Removes a watchlist from the database based on the provided watchlist
+        ID
+      parameters:
+      - description: Delete Request (watchlist_id)
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.WatchListDeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: WatchList deleted successfully
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid WatchList ID
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Failed to delete WatchList
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a watchlist entry
+      tags:
+      - watchlists
+  /watchlist/notwatched:
+    get:
+      description: Returns all watchlists with a "not watched" status from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Watchlist'
+            type: array
+        "500":
+          description: Failed to get Watching List
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Retrieve watchlists that are not watched
+      tags:
+      - watchlists
+  /watchlist/update:
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing watchlist with new data
+      parameters:
+      - description: Updated WatchList Data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.WatchListUpdateRequestExample'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: WatchList updated successfully
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Invalid WatchList Data
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Failed to update WatchList
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update an existing watchlist entry
+      tags:
+      - watchlists
+  /watchlist/watched:
+    get:
+      description: Fetches all watchlists with a "watched" status from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Watchlist'
+            type: array
+        "500":
+          description: Failed to get Watched List
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Retrieve watched watchlists
+      tags:
+      - watchlists
+  /watchlist/watching:
+    get:
+      description: Returns all watchlists with a "watching" status from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Watchlist'
+            type: array
+        "500":
+          description: Failed to get Watching List
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Retrieve watchlists with "watching" status
+      tags:
+      - watchlists
+swagger: "2.0"
