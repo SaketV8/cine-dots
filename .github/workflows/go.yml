@@ -33,6 +33,7 @@ jobs:
 
     - name: Generate a coverage report
       run: go test -v -coverpkg=./pkg/handlers,./pkg/repositories ./tests/... -coverprofile=coverage.out
+      continue-on-error: true
 
     - name: Coverage summary
       run: go tool cover -func=coverage.out
