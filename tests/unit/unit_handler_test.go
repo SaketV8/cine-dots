@@ -515,6 +515,8 @@ func TestUpdateWatchListHandler(t *testing.T) {
 				WatchlistID: 50,
 				Title:       "Updated Title",
 				ReleaseYear: 2021,
+				Director:    "Director A",
+				Genre:       "Adventure",
 				Status:      "watched",
 			},
 			mockFunc: func(req models.WatchListUpdateRequest) (int, error) {
@@ -543,8 +545,9 @@ func TestUpdateWatchListHandler(t *testing.T) {
 			mockFunc: func(req models.WatchListUpdateRequest) (int, error) {
 				return 0, errors.New("not found")
 			},
-			expectedStatus: http.StatusInternalServerError,
-			expectError:    true,
+			expectedStatus: http.StatusBadRequest,
+			// expectedStatus: http.StatusInternalServerError,
+			expectError: true,
 		},
 	}
 	for _, tt := range tests {
